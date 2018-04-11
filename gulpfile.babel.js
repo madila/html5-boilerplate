@@ -76,13 +76,15 @@ gulp.task('clean', (done) => {
 });
 
 gulp.task('copy', [
-  'copy:.htaccess',
+  //'copy:.htaccess',
   'copy:index.html',
-  'copy:jquery',
+  //'copy:jquery',
   'copy:license',
-  'copy:main.css',
-  'copy:misc',
-  'copy:normalize'
+  //'copy:main.css',
+  //'copy:misc',
+  //'copy:normalize'
+  'copy:indigo',
+  'copy:mikado',
 ]);
 
 gulp.task('copy:.htaccess', () =>
@@ -96,13 +98,13 @@ gulp.task('copy:index.html', () => {
     fs.readFileSync('node_modules/jquery/dist/jquery.min.js'),
     {algorithms: ['sha256']}
   );
-  let version = pkg.devDependencies.jquery;
-  let modernizrVersion = pkg.devDependencies.modernizr;
+  //let version = pkg.devDependencies.jquery;
+  //let modernizrVersion = pkg.devDependencies.modernizr;
 
   gulp.src(`${dirs.src}/index.html`)
-    .pipe(plugins().replace(/{{JQUERY_VERSION}}/g, version))
-    .pipe(plugins().replace(/{{MODERNIZR_VERSION}}/g, modernizrVersion))
-    .pipe(plugins().replace(/{{JQUERY_SRI_HASH}}/g, hash.toString()))
+    //.pipe(plugins().replace(/{{JQUERY_VERSION}}/g, version))
+    //.pipe(plugins().replace(/{{MODERNIZR_VERSION}}/g, modernizrVersion))
+    //.pipe(plugins().replace(/{{JQUERY_SRI_HASH}}/g, hash.toString()))
     .pipe(gulp.dest(dirs.dist));
 });
 
@@ -129,6 +131,34 @@ gulp.task('copy:main.css', () => {
     }))
     .pipe(gulp.dest(`${dirs.dist}/css`));
 });
+
+gulp.task('copy:mikado', () =>
+    gulp.src([
+
+      // Copy all files
+      `./node_modules/mikado/dist/js/**/*`,
+
+    ], {
+
+      // Include hidden files by default
+      dot: false
+
+    }).pipe(gulp.dest(`${dirs.dist}/js`))
+);
+
+gulp.task('copy:indigo', () =>
+    gulp.src([
+
+      // Copy all files
+      `./node_modules/indigo/dist/css/**/*`,
+
+    ], {
+
+      // Include hidden files by default
+      dot: false
+
+    }).pipe(gulp.dest(`${dirs.dist}/css`))
+);
 
 gulp.task('copy:misc', () =>
   gulp.src([

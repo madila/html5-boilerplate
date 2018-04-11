@@ -1,4 +1,8 @@
-{
+  {
+  "dependencies": {
+    "mikado": "git://github.com/OllieFordandCo/mikado.git#master",
+    "indigo": "https://madila:a0ed0fe21f71f47bec13d6cf6070ec5ff903f18b@github.com/OllieFordandCo/indigo#master"
+  },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
     "apache-server-configs": "2.15.0",
